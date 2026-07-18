@@ -1,4 +1,5 @@
 # Deploy this repository's static files to GitHub Pages
+# Re-triggered after selecting GitHub Actions as the Pages source.
 name: Deploy static content to Pages
 
 on:
