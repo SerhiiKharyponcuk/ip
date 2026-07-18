@@ -47,7 +47,56 @@ function fillResults(data) {
   $("#country").textContent = data?.country || "неизвестно";
   $("#timezone").textContent = data?.timezone?.id || Intl.DateTimeFormat().resolvedOptions().timeZone;
   $("#isp").textContent = data?.connection?.isp || "неизвестно";
-  $("#platform").textContent = `СИСТЕМА: ${navigator.platform || "НЕИЗВЕСТНО"} // ЯЗЫК: ${navigator.language}`;
+  updateSystemInfo();
+}
+
+async function updateSystemInfo() {
+  const userAgent = navigator.userAgent || "";
+  const language = navigator.language || "неизвестно";
+  let platform = "неизвестно";
+  let bitness = "";
+  let architecture = "";
+
+  if (navigator.userAgentData) {
+    platform = navigator.userAgentData.platform || platform;
+
+    try {
+      const details = await navigator.userAgentData.getHighEntropyValues([
+        "architecture",
+        "bitness",
+        "wow64",
+      ]);
+
+      // wow64 means a 32-bit browser is running on 64-bit Windows.
+      bitness = details.wow64 ? "64" : details.bitness || "";
+
+      if (details.architecture === "x86") {
+        architecture = bitness === "64" ? "x86_64" : "x86";
+      } else if (details.architecture === "arm") {
+        architecture = bitness === "64" ? "ARM64" : "ARM";
+      } else {
+        architecture = details.architecture || "";
+      }
+    } catch {
+      // Fall back to the traditional user-agent string below.
+    }
+  }
+
+  if (platform === "неизвестно") {
+    if (/Windows/i.test(userAgent)) platform = "Windows";
+    else if (/Android/i.test(userAgent)) platform = "Android";
+    else if (/iPhone|iPad|iPod/i.test(userAgent)) platform = "iOS";
+    else if (/Mac OS/i.test(userAgent)) platform = "macOS";
+    else if (/Linux/i.test(userAgent)) platform = "Linux";
+  }
+
+  if (!bitness && /Win64|x64|WOW64|amd64|arm64|aarch64/i.test(userAgent)) {
+    bitness = "64";
+  }
+
+  const systemText = `${platform}${bitness ? ` ${bitness}-БИТ` : ""}`;
+  const architectureText = architecture ? ` // АРХИТЕКТУРА: ${architecture}` : "";
+  $("#platform").textContent = `СИСТЕМА: ${systemText}${architectureText} // ЯЗЫК: ${language}`;
 }
 
 async function startScan() {
