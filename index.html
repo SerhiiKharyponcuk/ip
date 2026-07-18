@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="uk">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#020604" />
     <meta
       name="description"
-      content="Інтерактивна демонстрація IP-адреси та геолокації у кіберпанк-стилі."
+      content="Интерактивная демонстрация IP-адреса и геолокации в киберпанк-стиле."
     />
     <title>TRACE://YOU</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,15 +27,12 @@
       </header>
 
       <section class="hero" id="hero">
-        <p class="eyebrow">OSINT TERMINAL / PUBLIC DATA</p>
-        <h1>ТВОЯ МЕРЕЖА<br /><span>ЗАЛИШИЛА СЛІД</span></h1>
+        <p class="eyebrow">OSINT-ТЕРМИНАЛ / ОТКРЫТЫЕ ДАННЫЕ</p>
+        <h1>ТВОЯ СЕТЬ<br /><span>ОСТАВИЛА СЛЕД</span></h1>
         <p class="lead">
-          Ця сторінка показує, що звичайний сайт може дізнатися про твоє
-          підключення. Жодні дані тут не зберігаються.
+          Эта страница показывает, что обычный сайт может узнать о твоём
+          подключении. Никакие данные здесь не сохраняются.
         </p>
-        <button class="primary" id="startButton" type="button">
-          <span>[</span> ЗАПУСТИТИ СКАНУВАННЯ <span>]</span>
-        </button>
       </section>
 
       <section class="scanner hidden" id="scanner" aria-live="polite">
@@ -50,25 +47,25 @@
       <section class="results hidden" id="results">
         <div class="results-head">
           <div>
-            <p class="eyebrow">SCAN COMPLETE</p>
-            <h2>ЦИФРОВИЙ ВІДБИТОК</h2>
+            <p class="eyebrow">СКАНИРОВАНИЕ ЗАВЕРШЕНО</p>
+            <h2>ЦИФРОВОЙ ОТПЕЧАТОК</h2>
           </div>
-          <span class="risk">VISIBLE</span>
+          <span class="risk">ВИДЕН</span>
         </div>
 
         <div class="grid">
           <article class="card featured">
-            <span class="label">PUBLIC IP</span>
+            <span class="label">ПУБЛИЧНЫЙ IP</span>
             <strong id="ip">—</strong>
-            <small id="connection">очікування відповіді…</small>
+            <small id="connection">ожидание ответа…</small>
           </article>
           <article class="card">
-            <span class="label">ПРИБЛИЗНЕ МІСТО</span>
+            <span class="label">ПРИМЕРНЫЙ ГОРОД</span>
             <strong id="city">—</strong>
-            <small id="region">за IP-адресою</small>
+            <small id="region">по IP-адресу</small>
           </article>
           <article class="card">
-            <span class="label">КРАЇНА</span>
+            <span class="label">СТРАНА</span>
             <strong id="country">—</strong>
             <small id="timezone">—</small>
           </article>
@@ -81,22 +78,22 @@
 
         <article class="location-panel">
           <div>
-            <p class="eyebrow">PRECISE LOCATION</p>
-            <h3>Хочеш побачити точні координати?</h3>
+            <p class="eyebrow">ТОЧНАЯ ГЕОЛОКАЦИЯ</p>
+            <h3>Хочешь увидеть точные координаты?</h3>
             <p id="geoText">
-              Браузер покаже системний запит. Координати обробляються лише на
-              твоєму пристрої та нікуди не надсилаються.
+              Браузер покажет системный запрос. Координаты обрабатываются только
+              на твоём устройстве и никуда не отправляются.
             </p>
           </div>
           <button class="secondary" id="locationButton" type="button">
-            ДОЗВОЛИТИ ГЕОЛОКАЦІЮ
+            РАЗРЕШИТЬ ГЕОЛОКАЦИЮ
           </button>
           <div class="coordinates hidden" id="coordinates">
             <span>LAT <b id="latitude">—</b></span>
             <span>LON <b id="longitude">—</b></span>
             <span>± <b id="accuracy">—</b> м</span>
             <a id="mapLink" href="#" target="_blank" rel="noopener noreferrer"
-              >ВІДКРИТИ НА МАПІ ↗</a
+              >ОТКРЫТЬ НА КАРТЕ ↗</a
             >
           </div>
         </article>
@@ -104,17 +101,17 @@
         <aside class="prank" id="prank">
           <div class="warning">!</div>
           <div>
-            <strong id="prankTitle">ДОСТУП ДО КАМЕРИ ОТРИМАНО...</strong>
-            <p id="prankText">Підготовка знімка через 3 секунди.</p>
+            <strong id="prankTitle">ДОСТУП К КАМЕРЕ ПОЛУЧЕН...</strong>
+            <p id="prankText">Подготовка снимка через 3 секунды.</p>
           </div>
         </aside>
 
-        <button class="reset" id="resetButton" type="button">↻ НОВЕ СКАНУВАННЯ</button>
+        <button class="reset" id="resetButton" type="button">↻ НОВОЕ СКАНИРОВАНИЕ</button>
       </section>
 
       <footer>
-        <span>EDUCATIONAL DEMO</span>
-        <span>NO DATA STORED // SESSION ONLY</span>
+        <span>ДЕМОНСТРАЦИОННЫЙ ПРОЕКТ</span>
+        <span>ДАННЫЕ НЕ СОХРАНЯЮТСЯ // ТОЛЬКО СЕАНС</span>
       </footer>
     </main>
 
