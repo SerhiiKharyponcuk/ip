@@ -9,7 +9,7 @@ const progressBar = $("#progressBar");
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function updateClock() {
-  $("#clock").textContent = new Intl.DateTimeFormat("uk-UA", {
+  $("#clock").textContent = new Intl.DateTimeFormat("ru-RU", {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
@@ -41,12 +41,12 @@ async function getNetworkData() {
 
 function fillResults(data) {
   $("#ip").textContent = data?.ip || "недоступно";
-  $("#connection").textContent = data?.type ? `${data.type.toUpperCase()} CONNECTION` : "дані приховані або заблоковані";
-  $("#city").textContent = data?.city || "невідомо";
-  $("#region").textContent = data?.region || "за IP-адресою";
-  $("#country").textContent = data?.country || "невідомо";
+  $("#connection").textContent = data?.type ? `${data.type.toUpperCase()} СОЕДИНЕНИЕ` : "данные скрыты или заблокированы";
+  $("#city").textContent = data?.city || "неизвестно";
+  $("#region").textContent = data?.region || "по IP-адресу";
+  $("#country").textContent = data?.country || "неизвестно";
   $("#timezone").textContent = data?.timezone?.id || Intl.DateTimeFormat().resolvedOptions().timeZone;
-  $("#isp").textContent = data?.connection?.isp || "невідомо";
+  $("#isp").textContent = data?.connection?.isp || "неизвестно";
   $("#platform").textContent = `${navigator.platform || "DEVICE"} // ${navigator.language}`;
 }
 
@@ -59,13 +59,13 @@ async function startScan() {
 
   const dataPromise = getNetworkData();
   const steps = [
-    ["Ініціалізація захищеного термінала...", "muted", 350, 12],
-    ["Перевірка мережевого інтерфейсу", "ok", 500, 26],
-    ["Пошук публічної IP-адреси...", "", 600, 43],
-    ["Аналіз маршруту та провайдера", "ok", 500, 61],
-    ["Зіставлення регіону підключення...", "", 650, 79],
-    ["Формування цифрового відбитка", "ok", 450, 94],
-    ["Сканування завершено", "warn", 350, 100],
+    ["Инициализация защищённого терминала...", "muted", 350, 12],
+    ["Проверка сетевого интерфейса", "ok", 500, 26],
+    ["Поиск публичного IP-адреса...", "", 600, 43],
+    ["Анализ маршрута и провайдера", "ok", 500, 61],
+    ["Определение региона подключения...", "", 650, 79],
+    ["Формирование цифрового отпечатка", "ok", 450, 94],
+    ["Сканирование завершено", "warn", 350, 100],
   ];
 
   for (const [text, className, delay, progress] of steps) {
@@ -86,19 +86,19 @@ async function runPrank() {
   const title = $("#prankTitle");
   const text = $("#prankText");
   prank.classList.remove("safe");
-  title.textContent = "ДОСТУП ДО КАМЕРИ ОТРИМАНО...";
-  text.textContent = "Підготовка знімка через 3 секунди.";
+  title.textContent = "ДОСТУП К КАМЕРЕ ПОЛУЧЕН...";
+  text.textContent = "Подготовка снимка через 3 секунды.";
   await wait(700);
   prank.classList.add("show");
 
   for (let number = 3; number > 0; number -= 1) {
-    text.textContent = `Підготовка знімка через ${number} секунди.`;
+    text.textContent = `Подготовка снимка через ${number} секунды.`;
     await wait(850);
   }
 
   prank.classList.add("safe");
-  title.textContent = "ЖАРТ! КАМЕРА НЕ ВМИКАЛАСЯ 😄";
-  text.textContent = "Сайт не запитує доступ до камери й нічого не записує.";
+  title.textContent = "ШУТКА! КАМЕРА НЕ ВКЛЮЧАЛАСЬ 😄";
+  text.textContent = "Сайт не запрашивает доступ к камере и ничего не записывает.";
 }
 
 function requestLocation() {
@@ -106,13 +106,13 @@ function requestLocation() {
   const geoText = $("#geoText");
 
   if (!navigator.geolocation) {
-    geoText.textContent = "Цей браузер не підтримує геолокацію.";
+    geoText.textContent = "Этот браузер не поддерживает геолокацию.";
     button.disabled = true;
     return;
   }
 
   button.disabled = true;
-  button.textContent = "ОЧІКУВАННЯ ДОЗВОЛУ...";
+  button.textContent = "ОЖИДАНИЕ РАЗРЕШЕНИЯ...";
   navigator.geolocation.getCurrentPosition(
     ({ coords }) => {
       const lat = coords.latitude.toFixed(6);
@@ -122,30 +122,29 @@ function requestLocation() {
       $("#accuracy").textContent = Math.round(coords.accuracy);
       $("#mapLink").href = `https://www.google.com/maps?q=${encodeURIComponent(`${lat},${lon}`)}`;
       $("#coordinates").classList.remove("hidden");
-      geoText.textContent = "Координати отримано локально. Після закриття сторінки вони зникнуть.";
+      geoText.textContent = "Координаты получены локально. После закрытия страницы они исчезнут.";
       button.classList.add("hidden");
     },
     (error) => {
       const messages = {
-        1: "Доступ відхилено. Це нормально — без дозволу точну адресу визначити неможливо.",
-        2: "Не вдалося визначити місцеположення.",
-        3: "Час очікування минув. Спробуй ще раз.",
+        1: "Доступ отклонён. Без разрешения определить точное местоположение невозможно.",
+        2: "Не удалось определить местоположение.",
+        3: "Время ожидания истекло. Попробуй ещё раз.",
       };
-      geoText.textContent = messages[error.code] || "Сталася помилка геолокації.";
+      geoText.textContent = messages[error.code] || "Произошла ошибка геолокации.";
       button.disabled = false;
-      button.textContent = "СПРОБУВАТИ ЩЕ РАЗ";
+      button.textContent = "ПОПРОБОВАТЬ ЕЩЁ РАЗ";
     },
     { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 },
   );
 }
 
-$("#startButton").addEventListener("click", startScan);
 $("#locationButton").addEventListener("click", requestLocation);
 $("#resetButton").addEventListener("click", () => {
   results.classList.add("hidden");
   $("#prank").classList.remove("show", "safe");
-  hero.classList.remove("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(startScan, 250);
 });
 
 // Lightweight Matrix-style background.
@@ -177,3 +176,6 @@ function drawMatrix() {
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 drawMatrix();
+
+// Start automatically so the visitor sees the scan without clicking anything.
+setTimeout(startScan, 450);
