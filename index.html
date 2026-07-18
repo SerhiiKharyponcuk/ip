@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#020604" />
+    <meta
+      name="description"
+      content="Інтерактивна демонстрація IP-адреси та геолокації у кіберпанк-стилі."
+    />
+    <title>TRACE://YOU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="matrix" aria-hidden="true"></canvas>
+
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand"><span class="pulse"></span> TRACE://YOU</div>
+        <div class="status" id="clock">00:00:00</div>
+      </header>
+
+      <section class="hero" id="hero">
+        <p class="eyebrow">OSINT TERMINAL / PUBLIC DATA</p>
+        <h1>ТВОЯ МЕРЕЖА<br /><span>ЗАЛИШИЛА СЛІД</span></h1>
+        <p class="lead">
+          Ця сторінка показує, що звичайний сайт може дізнатися про твоє
+          підключення. Жодні дані тут не зберігаються.
+        </p>
+        <button class="primary" id="startButton" type="button">
+          <span>[</span> ЗАПУСТИТИ СКАНУВАННЯ <span>]</span>
+        </button>
+      </section>
+
+      <section class="scanner hidden" id="scanner" aria-live="polite">
+        <div class="terminal-head">
+          <span>visitor_trace.sh</span>
+          <span class="dots">● ● ●</span>
+        </div>
+        <div class="terminal" id="terminal"></div>
+        <div class="progress"><span id="progressBar"></span></div>
+      </section>
+
+      <section class="results hidden" id="results">
+        <div class="results-head">
+          <div>
+            <p class="eyebrow">SCAN COMPLETE</p>
+            <h2>ЦИФРОВИЙ ВІДБИТОК</h2>
+          </div>
+          <span class="risk">VISIBLE</span>
+        </div>
+
+        <div class="grid">
+          <article class="card featured">
+            <span class="label">PUBLIC IP</span>
+            <strong id="ip">—</strong>
+            <small id="connection">очікування відповіді…</small>
+          </article>
+          <article class="card">
+            <span class="label">ПРИБЛИЗНЕ МІСТО</span>
+            <strong id="city">—</strong>
+            <small id="region">за IP-адресою</small>
+          </article>
+          <article class="card">
+            <span class="label">КРАЇНА</span>
+            <strong id="country">—</strong>
+            <small id="timezone">—</small>
+          </article>
+          <article class="card">
+            <span class="label">ПРОВАЙДЕР</span>
+            <strong class="small-value" id="isp">—</strong>
+            <small id="platform">—</small>
+          </article>
+        </div>
+
+        <article class="location-panel">
+          <div>
+            <p class="eyebrow">PRECISE LOCATION</p>
+            <h3>Хочеш побачити точні координати?</h3>
+            <p id="geoText">
+              Браузер покаже системний запит. Координати обробляються лише на
+              твоєму пристрої та нікуди не надсилаються.
+            </p>
+          </div>
+          <button class="secondary" id="locationButton" type="button">
+            ДОЗВОЛИТИ ГЕОЛОКАЦІЮ
+          </button>
+          <div class="coordinates hidden" id="coordinates">
+            <span>LAT <b id="latitude">—</b></span>
+            <span>LON <b id="longitude">—</b></span>
+            <span>± <b id="accuracy">—</b> м</span>
+            <a id="mapLink" href="#" target="_blank" rel="noopener noreferrer"
+              >ВІДКРИТИ НА МАПІ ↗</a
+            >
+          </div>
+        </article>
+
+        <aside class="prank" id="prank">
+          <div class="warning">!</div>
+          <div>
+            <strong id="prankTitle">ДОСТУП ДО КАМЕРИ ОТРИМАНО...</strong>
+            <p id="prankText">Підготовка знімка через 3 секунди.</p>
+          </div>
+        </aside>
+
+        <button class="reset" id="resetButton" type="button">↻ НОВЕ СКАНУВАННЯ</button>
+      </section>
+
+      <footer>
+        <span>EDUCATIONAL DEMO</span>
+        <span>NO DATA STORED // SESSION ONLY</span>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
