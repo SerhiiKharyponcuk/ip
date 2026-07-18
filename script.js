@@ -139,6 +139,7 @@ function requestLocation() {
   );
 }
 
+$("#startButton").addEventListener("click", startScan);
 $("#locationButton").addEventListener("click", requestLocation);
 $("#resetButton").addEventListener("click", () => {
   results.classList.add("hidden");
@@ -176,6 +177,3 @@ function drawMatrix() {
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 drawMatrix();
-
-// Start automatically so the visitor sees the scan without clicking anything.
-setTimeout(startScan, 450);
