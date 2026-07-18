@@ -29,7 +29,7 @@ function terminalLine(text, className = "") {
 
 async function getNetworkData() {
   try {
-    const response = await fetch("https://ipwho.is/");
+    const response = await fetch("https://ipwho.is/?lang=ru");
     if (!response.ok) throw new Error("network response failed");
     const data = await response.json();
     if (!data.success) throw new Error(data.message || "lookup failed");
@@ -41,13 +41,13 @@ async function getNetworkData() {
 
 function fillResults(data) {
   $("#ip").textContent = data?.ip || "недоступно";
-  $("#connection").textContent = data?.type ? `${data.type.toUpperCase()} СОЕДИНЕНИЕ` : "данные скрыты или заблокированы";
+  $("#connection").textContent = data?.type ? `${data.type.toUpperCase()} // СОЕДИНЕНИЕ` : "данные скрыты или заблокированы";
   $("#city").textContent = data?.city || "неизвестно";
   $("#region").textContent = data?.region || "по IP-адресу";
   $("#country").textContent = data?.country || "неизвестно";
   $("#timezone").textContent = data?.timezone?.id || Intl.DateTimeFormat().resolvedOptions().timeZone;
   $("#isp").textContent = data?.connection?.isp || "неизвестно";
-  $("#platform").textContent = `${navigator.platform || "DEVICE"} // ${navigator.language}`;
+  $("#platform").textContent = `СИСТЕМА: ${navigator.platform || "НЕИЗВЕСТНО"} // ЯЗЫК: ${navigator.language}`;
 }
 
 async function startScan() {
