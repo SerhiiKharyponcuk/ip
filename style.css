@@ -96,7 +96,7 @@ button { font: inherit; cursor: pointer; }
 .terminal { min-height: 420px; padding: 22px; color: var(--green); font-size: 13px; line-height: 1.9; box-shadow: inset 0 0 50px rgba(0,0,0,.75); }
 .terminal p { margin: 0; }
 .terminal .muted { color: var(--muted); }
-.terminal .ok::before { content: "[OK] "; color: var(--green); }
+.terminal .ok::before { content: "[ГОТОВО] "; color: var(--green); }
 .terminal .warn { color: #f5d04c; }
 .cursor { display: inline-block; width: 8px; height: 1em; vertical-align: -2px; background: var(--green); animation: blink .7s infinite; }
 .progress { height: 3px; margin-top: 12px; background: #07140b; }
